@@ -22,16 +22,22 @@ function comments(state = [], action) {
 				id: action.id,
 				text: action.text
 			}]
+		*/
 		case THUMB_UP_COMMENT:
-			return [{
-				id: action.id,
-				votes: ++
-			}]
+			return state.map(comment => {
+				if(comment.id === action.id) {
+				return {...comment, votes: comment.votes + 1}
+				}
+			return comment;
+			})
+		
 		case THUMB_DOWN_COMMENT:
-			return [{
-				id: action.id,
-				votes: --
-			}] */
+			return state.map(comment => {
+				if(comment.id === action.id) {
+				return {...comment, votes: comment.votes - 1}
+				}
+			return comment;
+			})
 		default:
 			return state;
 	}
